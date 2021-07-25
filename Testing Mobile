@@ -1,0 +1,27 @@
+*** Settings ***
+Library  AppiumLibrary    
+
+*** Variables ***
+${REMOTE_URL}     http://localhost:4723/wd/hub
+${PLATFORM_NAME}    Android
+${PLATFORM_VERSION}    11.0
+${DEVICE_NAME}    097f2163010ad15f
+${APP}             ${CURDIR}/apk/flashcoffee.xapk
+${PACKAGE_NAME}     com.flashcoffee
+
+*** Keywords ***
+Testing
+    Open Application    ${REMOTE_URL}    platformName=${PLATFORM_NAME}    platformVersion=${PLATFORM_VERSION}    deviceName=${DEVICE_NAME}  app=${APP}    automationName=Appium  appPackage=${PACKAGE_NAME}
+    Element Should Contain Text    driver.findElementsByXPath("//[@class='android.widget.TextView' and @text='PICK UP AT']");    PICK UP AT
+    Click Element    driver.findElementsByXPath("//[@class='android.widget.TextView' and @text='NEAREST']");   
+    Click Element    driver.findElementsByXPath("//[@class='android.view.ViewGroup' and @index='0']");   
+    Element Should Contain Text    driver.findElementsByXPath("//[@class='android.widget.TextView' and @index='1' and @text='Sign In']");    Sign In
+    Element Should Contain Text    driver.findElementsByXPath("//[@class='android.widget.TextView' and @index='1' and @text='Language']");    Language
+    Click Element    driver.findElementsByXPath("//[@class='android.widget.TextView' and @index='1' and @text='Language']");
+    Element Should Contain Text    driver.findElementsByXPath("//[@class='android.widget.TextView' and @index='0' and @text='Select Language']");    Select Language
+    Click Element    driver.findElementsByXPath("//[@class='android.widget.TextView' and @index='2' and @text='Bahasa Indonesia']");
+    Click Element    driver.findElementsByXPath("//[@class='android.widget.TextView' and @index='0' and @text='Save']");
+    Click Element    driver.findElementsByXPath("//[@class='android.view.ViewGroup' and @index='0']");   
+    Element Should Contain Text    driver.findElementsByXPath("//[@class='android.widget.TextView' and @index='1' and @text='Masuk']");    Masuk
+    Element Should Contain Text    driver.findElementsByXPath("//[@class='android.widget.TextView' and @index='1' and @text='Bahasa']");    Bahasa
+    Close Application
